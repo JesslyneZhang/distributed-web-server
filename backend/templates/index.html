@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Server Monitor</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #0000000d;
+        }
+
+        h1 { color: #1d4ed8; }
+
+        .status {
+            font-weight: bold;
+            color: #15803d;
+        }
+
+        input {
+            padding: 12px;
+            width: 70%;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 12px 18px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Distributed Server Monitor</h1>
+    <p>Monitoring application for distributed web servers.</p>
+
+    <div class="card">
+        <h2>Server Information</h2>
+        <p>Backend Server: <strong>{{ server_name }}</strong></p>
+        <p>Server Status: <span class="status">Running</span></p>
+        <p>Database Status: <strong>{{ db_status }}</strong></p>
+    </div>
+
+    <div class="card">
+        <h2>Add Message</h2>
+
+        <form action="/messages" method="POST">
+            <input
+                type="text"
+                name="content"
+                placeholder="Write a message..."
+                required
+            >
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Messages from Database</h2>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>
+                        {{ message.content }}
+                        <br>
+                        <small>{{ message.created_at }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No messages found or database is unavailable.</p>
+        {% endif %}
+    </div>
+
+</div>
+</body>
+</html>
