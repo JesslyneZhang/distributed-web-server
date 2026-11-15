@@ -104,7 +104,7 @@ distributed-web-server/
 
 | Anggota | Tanggung Jawab |
 |---|---|
-| Anggota 1 [Ein] | Persiapan Ubuntu Server VM, instalasi Docker dan Docker Compose, integrasi sistem, serta pengujian akhir |
+| Anggota 1 [Erin] | Persiapan Ubuntu Server VM, instalasi Docker dan Docker Compose, integrasi sistem, serta pengujian akhir |
 | Anggota 2 [Jesslyne] | Pengembangan aplikasi Flask, tampilan web, fitur tambah dan tampil data, serta backend Dockerfile |
 | Anggota 3 [Sheira] | Perancangan MySQL database, pembuatan init.sql, konfigurasi Nginx, Docker Compose, dan pengujian load balancing serta failover |
 
