@@ -92,6 +92,7 @@ distributed-web-server/
 │   └── nginx.conf
 │
 ├── docker-compose.yml
+├── .env.example
 │
 ├── README.md
 │
@@ -119,6 +120,17 @@ Sebelum menjalankan project, pastikan perangkat telah memiliki:
 - Git.
 
 Untuk pengembangan lokal, Docker Desktop dapat digunakan pada macOS atau Windows.
+
+### Menjalankan Project Secara Lokal
+
+Salin `.env.example` menjadi `.env`, lalu ganti nilai password contoh dengan password lokal yang kuat. File `.env` tidak boleh di-commit.
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+Aplikasi dapat diakses melalui `http://localhost:8080`.
 
 ## Git Workflow & Collaboration
 
