@@ -120,50 +120,129 @@ Sebelum menjalankan project, pastikan perangkat telah memiliki:
 
 Untuk pengembangan lokal, Docker Desktop dapat digunakan pada macOS atau Windows.
 
-## 9. Cara Menjalankan Project
+## Git Workflow & Collaboration
 
-### A. Clone Repository
+Untuk menjaga agar pengerjaan project tetap terorganisir dan menghindari konflik kode, setiap anggota kelompok wajib mengerjakan tugas pada branch masing-masing.
+
+**Jangan melakukan perubahan atau push langsung ke branch `main`.**
+
+### 1. Clone Repository
+
+Setiap anggota harus melakukan clone repository terlebih dahulu:
 
 ```bash
-git clone https://github.com/USERNAME/distributed-web-server.git
+git clone https://github.com/username/distributed-web-server.git
+```
+
+Masuk ke folder project:
+
+```bash
 cd distributed-web-server
 ```
 
-Ganti `USERNAME` dengan username pemilik repository.
+### 2. Pastikan Branch Main Terbaru
 
-### B. Menjalankan Sistem
-
-Setelah seluruh konfigurasi dan integrasi selesai, jalankan:
+Sebelum mulai mengerjakan tugas, pastikan repository lokal sudah mendapatkan perubahan terbaru:
 
 ```bash
-docker compose up --build -d
+git switch main
+git pull origin main
 ```
 
-Perintah tersebut akan membangun image dan menjalankan seluruh layanan yang didefinisikan dalam Docker Compose.
+### 3. Buat Branch Masing-Masing
 
-### C. Memeriksa Container
+Setiap anggota membuat branch sesuai dengan tanggung jawabnya.
+
+**Anggota 1 — VM dan Integrasi Docker**
 
 ```bash
-docker compose ps
+git switch -c feature/vm-integration
 ```
 
-### D. Mengakses Aplikasi
-
-Buka browser dan akses:
-
-```text
-http://localhost:8080
-```
-
-Untuk deployment pada Ubuntu Server VM, akses menggunakan IP address server dan port yang telah dikonfigurasi.
-
-### E. Menghentikan Sistem
+**Anggota 2 — Flask Backend dan Web Application**
 
 ```bash
-docker compose down
+git switch -c feature/backend-app
 ```
 
-Catatan: Perintah dan konfigurasi final akan disesuaikan dengan file Docker Compose hasil integrasi kelompok.
+**Anggota 3 — Database, Nginx, dan Docker Compose**
+
+```bash
+git switch -c feature/database-nginx
+```
+
+Setelah branch berhasil dibuat, seluruh perubahan yang dilakukan akan tersimpan pada branch tersebut.
+
+### 4. Simpan dan Upload Perubahan
+
+Setelah selesai mengerjakan fitur, jalankan:
+
+```bash
+git status
+```
+
+Tambahkan perubahan:
+
+```bash
+git add .
+```
+
+Buat commit:
+
+```bash
+git commit -m "Describe your changes"
+```
+
+Upload branch ke GitHub:
+
+```bash
+git push -u origin NAMA_BRANCH
+```
+
+Contoh untuk Anggota 2:
+
+```bash
+git push -u origin feature/backend-app
+```
+
+### 5. Menggabungkan Branch ke Main
+
+Setelah perubahan selesai di-upload:
+
+1. Buka repository GitHub.
+2. Pilih menu **Pull requests**.
+3. Klik **New pull request**.
+4. Atur base branch menjadi `main`.
+5. Pilih compare branch sesuai branch anggota.
+6. Periksa perubahan kode.
+7. Klik **Create pull request**.
+8. Anggota lain melakukan review.
+9. Jika sudah disetujui, klik **Merge pull request**.
+
+Setelah berhasil di-merge, perubahan akan masuk ke branch `main`.
+
+### 6. Memperbarui Project Setelah Merge
+
+Sebelum mulai mengerjakan tugas berikutnya, setiap anggota harus memperbarui branch main lokal:
+
+```bash
+git switch main
+git pull origin main
+```
+
+Jika ingin mengerjakan tugas baru, buat branch baru dari `main` terbaru.
+
+### 7. Aturan Kolaborasi
+
+- Setiap anggota wajib bekerja pada branch masing-masing.
+- Jangan melakukan push langsung ke `main`.
+- Gunakan commit message yang jelas dan sesuai perubahan.
+- Lakukan pull sebelum memulai pekerjaan baru.
+- Gunakan Pull Request untuk menggabungkan pekerjaan.
+- Jangan mengunggah file rahasia seperti `.env`, password, atau credential.
+- Jika terjadi konflik Git, selesaikan konflik terlebih dahulu sebelum melakukan merge.
+
+**Tujuan workflow ini:** memastikan setiap fitur dapat dikembangkan secara terpisah, diperiksa bersama, dan digabungkan dengan aman ke dalam project utama.
 
 ## 10. Skenario Pengujian
 
